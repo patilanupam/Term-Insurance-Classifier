@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🛡️ Term Insurance Analyzer
+# 🛡️ Term Insurance Classifier
 
 ### AI-powered term insurance comparison & recommendation engine for India
 
@@ -28,12 +28,12 @@
 ## 🗂️ Project Structure
 
 ```
-term_insurance_analyzer/
+term_insurance_Classifier/
 │
 ├── 🐍 backend/                    ← Python (FastAPI) server
 │   ├── main.py                    ← API routes (entry point)
 │   ├── database.py                ← Database models & connection
-│   ├── gemini_analyzer.py         ← Google Gemini AI integration
+│   ├── gemini_Classifier.py         ← Google Gemini AI integration
 │   ├── requirements.txt           ← Python dependencies
 │   ├── .env                       ← 🔑 Your Gemini API key (not committed)
 │   ├── .env.example               ← Template for .env
@@ -66,7 +66,7 @@ term_insurance_analyzer/
 │  ┌─────────────────────────────────────────────────────────┐   │
 │  │              React Frontend  (port 5173)                │   │
 │  │                                                         │   │
-│  │  [🔍 Analyzer Tab]          [📋 Manage Plans Tab]       │   │
+│  │  [🔍 Classifier Tab]          [📋 Manage Plans Tab]       │   │
 │  │   UserInputForm               ManagePlans               │   │
 │  │       ↓                      (add/edit/delete)          │   │
 │  │   AIRecommendation                                       │   │
@@ -78,7 +78,7 @@ term_insurance_analyzer/
 ┌─────────────────────────────────────────────────────────────────┐
 │                   FastAPI Backend  (port 8000)                  │
 │                                                                 │
-│   POST /api/recommend ──→ gemini_analyzer.py ──→ Gemini AI ─┐  │
+│   POST /api/recommend ──→ gemini_Classifier.py ──→ Gemini AI ─┐  │
 │   GET  /api/plans     ──→ database.py (SQLite)               │  │
 │   POST /api/plans     ──→ Create plan manually               │  │
 │   PUT  /api/plans/:id ──→ Update plan                        │  │
@@ -188,7 +188,7 @@ Scraper Priority Order:
 }
 ```
 
-> 🤖 **Model fallback chain:** If one model hits quota, the analyzer
+> 🤖 **Model fallback chain:** If one model hits quota, the Classifier
 > automatically tries: `gemini-2.5-flash-lite` → `gemini-2.5-flash` →
 > `gemini-2.0-flash` → `gemini-flash-latest` → rule-based ranking
 
@@ -275,7 +275,7 @@ TABLE insurance_plans
 ### Step 1 — Clone / open the project
 
 ```powershell
-cd "C:\path\to\term_insurance_analyzer"
+cd "C:\path\to\term_insurance_Classifier"
 ```
 
 ---
@@ -330,12 +330,12 @@ npm run dev
 
 ```
 ┌─────────────────────────────────────────────────────┐
-│  🛡️ Term Insurance Analyzer        [↺ Refresh Plans] │
+│  🛡️ Term Insurance Classifier        [↺ Refresh Plans] │
 │  ─────────────────────────────────────────────────  │
-│  [🔍 Analyzer]  [📋 Manage Plans]                   │
+│  [🔍 Classifier]  [📋 Manage Plans]                   │
 └─────────────────────────────────────────────────────┘
 
-🔍 ANALYZER TAB
+🔍 Classifier TAB
 ───────────────
   ┌──────────────────────────────────────────────────┐
   │  Age: [30]    Sum Assured (L): [100]             │
@@ -400,7 +400,7 @@ npm run dev
 4. Update `PlanFormModal.jsx` to add the new input field
 
 ### Change the AI model
-Edit `backend/gemini_analyzer.py`:
+Edit `backend/gemini_Classifier.py`:
 ```python
 _model = genai.GenerativeModel("gemini-2.5-flash")  # or any model you prefer
 ```
