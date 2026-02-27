@@ -1,13 +1,31 @@
 services:
+  # ── Backend API ──────────────────────────────────────────────────────────────
   - type: web
-    name: term-insurance-analyzer
+    name: term-insurance-backend
     env: python
-    buildCommand: >
-      cd frontend && npm install && npm run build &&
-      cd ../backend && pip install -r requirements.txt
-    startCommand: cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: GEMINI_API_KEY
         sync: false
       - key: PYTHON_VERSION
-        value: 3.11.0
+        value: "3.11.0"
+
+  # ── Frontend static site ─────────────────────────────────────────────────────
+  - type: web
+    name: term-insurance-frontend
+    env: static
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          name: term-insurance-backend
+          type: web
+          property: host
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
